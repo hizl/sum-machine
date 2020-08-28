@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import sum_machine.Interfaces.*;
 import sum_machine.App.App;
-import sum_machine.FilterList.FilterList
+import sum_machine.FilterList.FilterList;
 
 class Main {
     public static void main(String[] args) {
