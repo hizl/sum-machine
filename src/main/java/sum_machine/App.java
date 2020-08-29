@@ -1,4 +1,10 @@
-package sum_machine;
+package src.main.java.sum_machine;
+
+import java.util.HashMap;
+
+import src.main.java.sum_machine.Input;
+import src.main.java.sum_machine.Output;
+import src.main.java.sum_machine.FilterList;
 
 public class App {
     private Input input;

@@ -1,4 +1,8 @@
-package sum_machine;
+package src.main.java.sum_machine;
+
+import java.util.HashMap;
+
+import src.main.java.sum_machine.Filter;
 
 //Лучше добавить метод для валидации аргументов в интерфейс фильтра.
 //Да. И для каждого фильтра своя реализация будет.

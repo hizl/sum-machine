@@ -1,11 +1,9 @@
 
-package sum_machine;
+package src.main.java.sum_machine;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import sum_machine.Interfaces.*;
-import sum_machine.App.App;
-import sum_machine.FilterList.FilterList;
+import src.main.java.sum_machine.App;
 
 class Main {
     public static void main(String[] args) {
