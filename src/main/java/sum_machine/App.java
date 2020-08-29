@@ -12,14 +12,16 @@ public class App {
     private AppState state;
     private HashMap<String, Filter> filters;
 
-
-    private App inputFilter() {
+    private App inputFilter() throws Exception {
         this.output.output("Enter filter with one argument: ");
         String filterName = this.input.next();
-        int argument = this.input.nextInt();
-        FilterList.checkInputString(filterName);
-        FilterList.checkInputInteger(argument);
+        boolean filterExists = this.filters.containsKey(filterName);
 
+        if (!filterExists) {
+            throw new Exception("This filter doesn't exist");
+        }
+        
+        int argument = this.input.nextInt();
 
         this.state.setFilter(this.filters.get(filterName)).setFilterArg(argument);
 
@@ -27,13 +29,10 @@ public class App {
     }
 
     private App inputNumbersCount() {
-
         this.output.output("Enter amount of numbers: ");
         int numbersCount = this.input.nextInt();
-        FilterList.checkInputInteger(numbersCount);
 
         this.state.setNumbers(new int[numbersCount]);
-
 
         return this;
     }
@@ -41,12 +40,10 @@ public class App {
     private App inputNumbers() {
         this.output.output("Enter numbers: ");
 
-
         int[] numbers = this.state.getNumbers();
 
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = this.input.nextInt();
-            FilterList.checkInputInteger(numbers[i]);
         }
 
         return this;
@@ -86,7 +83,11 @@ public class App {
     }
 
     public void run() {
-        this.inputFilter().inputNumbersCount().inputNumbers().calculateSum().outputSum();
+        try {
+            this.inputFilter().inputNumbersCount().inputNumbers().calculateSum().outputSum();
+        } catch (Exception error) {
+            this.output.output(error.getMessage());
+        }
     }
 }
 

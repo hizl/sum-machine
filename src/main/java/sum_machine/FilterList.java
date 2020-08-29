@@ -16,18 +16,11 @@ public class FilterList {
     private FilterList() {
     }
 
-    public static void checkInputInteger(int number) {
-        if (filters.containsValue(Integer.valueOf(number))) {
-            throw new IllegalArgumentException("Invalid! There must be a number");
-        }
+    // Зачем включать в API списка фильтров метод для парсинга интов (который используется только в фильтрах)?
+    private static int[] parseIntegerArguments(String argsLine) {
+        // Your code here
+        return null;
     }
-
-    public static void checkInputString(String string) {
-        if (!filters.containsKey(string)) {
-            throw new IllegalArgumentException("this filter is not defined ");
-        }
-    }
-
 
     private static void fillFilters() {
         filters = new HashMap<String, Filter>();
@@ -35,7 +28,7 @@ public class FilterList {
         filters.put("NDVB", new Filter() {
             @Override
             public boolean isValid(int compared, int source) {
-                return compared % source == 1;
+                return compared % source != 0;
             }
         });
 
