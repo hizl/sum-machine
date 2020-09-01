@@ -1,85 +1,133 @@
 package src.main.java.sum_machine;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 
-import src.main.java.sum_machine.Filter;
-
-//Лучше добавить метод для валидации аргументов в интерфейс фильтра.
-//Да. И для каждого фильтра своя реализация будет.
-//Чтобы не копипастить один и тот же код парсинга списка целых чисел,
-//Можно сделать этот метод  в синглтоне с фильтрами. И его прокинуть в метод для каждого из существующих фильтров при их создании
-//
-
 public class FilterList {
-    private static HashMap<String, Filter> filters = null;
+    private static HashMap<String, Filter<Integer>> filters = null;
 
-    private FilterList() {
+    FilterList() {
     }
 
-    // Зачем включать в API списка фильтров метод для парсинга интов (который используется только в фильтрах)?
-    private static int[] parseIntegerArguments(String argsLine) {
-        // Your code here
+    protected static int[] parseIntegerArguments(String argsLine) {
         return null;
     }
 
+
     private static void fillFilters() {
-        filters = new HashMap<String, Filter>();
+        filters = new HashMap<String, Filter<Integer>>();
 
-        filters.put("NDVB", new Filter() {
+        filters.put("ISPRM", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared % source != 0;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                BigInteger bigInteger = BigInteger.valueOf(compared);
+                boolean probablePrime;
+                return probablePrime = bigInteger.isProbablePrime((int) Math.log(compared));
             }
         });
 
 
-        filters.put("LESQ", new Filter() {
+        filters.put("NDVB", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared <= source;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared % sourceArgs != 0;
             }
         });
 
 
-        filters.put("GRTQ", new Filter() {
+        filters.put("LESQ", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared >= source;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared <= sourceArgs;
             }
         });
 
 
-        filters.put("LESS", new Filter() {
+        filters.put("GRTQ", new Filter<Integer>() {
+
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared < source;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared >= (int) sourceArgs;
             }
         });
-        filters.put("GRT", new Filter() {
+
+
+        filters.put("LESS", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared > source;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared < (int) sourceArgs;
             }
         });
-        filters.put("EQ", new Filter() {
+        filters.put("GRT", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared == source;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared > sourceArgs;
             }
         });
-        filters.put("DIVB", new Filter() {
+        filters.put("EQ", new Filter<Integer>() {
             @Override
-            public boolean isValid(int compared, int source) {
-                return compared % source == 0;
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared == sourceArgs;
+            }
+        });
+        filters.put("DIVB", new Filter<Integer>() {
+
+            @Override
+            public Integer parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared, Integer sourceArgs) {
+                return compared % sourceArgs == 0;
             }
         });
     }
 
-    public static HashMap<String, Filter> get() {
+    public static HashMap<String, Filter<Integer>> get() {
+
         if (filters == null) {
             fillFilters();
         }
 
         return filters;
     }
+
+
 }
