@@ -24,7 +24,7 @@ public class FilterList {
 
             // Попробуй без библиотечных методов написать проверку на простоту числа)
             @Override
-            public boolean isValid(int compared, Object sourceArgs) {
+            public boolean isValid(int compared) {
 
                 return false;
             }
@@ -41,7 +41,7 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Pair<Integer, Integer> sourceArgs) {
+            public boolean isValid(int compared) {
 
                 return false;
             }
@@ -58,7 +58,7 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, int[] sourceArgs) {
+            public boolean isValid(int compared) {
 
                 return false;
             }
@@ -72,8 +72,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared % sourceArgs != 0;
+            public boolean isValid(int compared) {
+                return compared % this.data != 0;
             }
         });
 
@@ -86,8 +86,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared <= sourceArgs;
+            public boolean isValid(int compared) {
+                return compared <= this.data;
             }
         });
 
@@ -100,8 +100,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared >= sourceArgs;
+            public boolean isValid(int compared) {
+                return compared >= this.data;
             }
         });
 
@@ -115,8 +115,8 @@ public class FilterList {
 
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared < sourceArgs;
+            public boolean isValid(int compared) {
+                return compared < this.data;
             }
         });
 
@@ -128,8 +128,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared > sourceArgs;
+            public boolean isValid(int compared) {
+                return compared > this.data;
             }
         });
 
@@ -141,8 +141,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared == sourceArgs;
+            public boolean isValid(int compared) {
+                return compared == this.data;
             }
         });
 
@@ -154,8 +154,8 @@ public class FilterList {
             }
 
             @Override
-            public boolean isValid(int compared, Integer sourceArgs) {
-                return compared % sourceArgs == 0;
+            public boolean isValid(int compared) {
+                return compared % this.data == 0;
             }
         });
     }
