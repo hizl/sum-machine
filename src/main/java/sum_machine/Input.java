@@ -5,4 +5,6 @@ public interface Input {
 
     public int nextInt();
 
+    public String nextLine();
+
 }

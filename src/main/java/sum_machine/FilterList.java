@@ -9,7 +9,10 @@ public class FilterList {
     FilterList() {
     }
 
-    protected static int[] parseIntegerArguments(String argsLine) {
+    private static int[] parseIntegerArguments(String argsLine) {
+
+
+
         return null;
     }
 
@@ -20,14 +23,14 @@ public class FilterList {
         filters.put("ISPRM", new Filter<Integer>() {
             @Override
             public Integer parseArgs(String argsLine) {
+
                 return null;
             }
 
             @Override
             public boolean isValid(int compared, Integer sourceArgs) {
-                BigInteger bigInteger = BigInteger.valueOf(compared);
-                boolean probablePrime;
-                return probablePrime = bigInteger.isProbablePrime((int) Math.log(compared));
+
+                return false;
             }
         });
 

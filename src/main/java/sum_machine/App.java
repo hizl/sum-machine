@@ -10,30 +10,34 @@ public class App {
     private Input input;
     private Output output;
     private AppState state;
-    private HashMap<String, Filter> filters;
+    private HashMap<String, Filter<Integer>> filters;
 
     private App inputFilter() throws Exception {
-        this.output.output("Enter filter with one argument: ");
-        String filterName = this.input.next();
-        boolean filterExists = this.filters.containsKey(filterName);
+        this.output.output("Enter filter : ");
+        String filterName = this.input.nextLine();
 
-        if (!filterExists) {
-            throw new Exception("This filter doesn't exist");
+        if (filterName.endsWith(" ")) {
+            output.output("write argument : ");
+        }else {
+            boolean filterExists = this.filters.containsKey(filterName);
+            if (!filterExists) {
+                throw new Exception("This filter doesn't exist ");
+            }
         }
-        
-        int argument = this.input.nextInt();
 
-        this.state.setFilter(this.filters.get(filterName)).setFilterArg(argument);
+
+            int argument = this.input.nextInt();
+            this.state.setFilter(this.filters.get(filterName)).setFilterArg(argument);
+
 
         return this;
     }
 
+
     private App inputNumbersCount() {
         this.output.output("Enter amount of numbers: ");
         int numbersCount = this.input.nextInt();
-
         this.state.setNumbers(new int[numbersCount]);
-
         return this;
     }
 
@@ -104,6 +108,7 @@ class AppState {
     public AppState setFilter(Filter filter) {
         this.filter = filter;
         return this;
+
     }
 
     public int getFilterArg() {
@@ -133,3 +138,4 @@ class AppState {
         return this;
     }
 }
+

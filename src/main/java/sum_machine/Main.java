@@ -1,5 +1,6 @@
 
 package src.main.java.sum_machine;
+
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -11,6 +12,13 @@ class Main {
 
         Input input = new Input() {
             private Scanner scanner = new Scanner(System.in);
+
+
+            @Override
+            public String nextLine() {
+                String line = this.scanner.nextLine();
+                return line;
+            }
 
             @Override
             public String next() {
@@ -26,6 +34,8 @@ class Main {
                 int number = this.scanner.nextInt();
                 return number;
             }
+
+
         };
 
 
