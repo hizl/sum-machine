@@ -14,25 +14,22 @@ public class App {
 
     private App inputFilter() throws Exception {
         this.output.output("Enter filter : ");
-        String filterName = this.input.nextLine();
+        String filterName = this.input.next();
 
-        if (filterName.endsWith(" ")) {
-            output.output("write argument : ");
-        }else {
-            boolean filterExists = this.filters.containsKey(filterName);
-            if (!filterExists) {
-                throw new Exception("This filter doesn't exist ");
-            }
+        boolean filterExists = this.filters.containsKey(filterName);
+        if (!filterExists) {
+            throw new Exception("This filter doesn't exist ");
         }
-
-
-            int argument = this.input.nextInt();
-            this.state.setFilter(this.filters.get(filterName)).setFilterArg(argument);
-
+        
+        this.state.setFilter(this.filters.get(filterName));
 
         return this;
     }
 
+    private App inputFilterArgs() {
+        // Здесь считывать строку с аргументами
+        return this;
+    }
 
     private App inputNumbersCount() {
         this.output.output("Enter amount of numbers: ");
@@ -88,7 +85,12 @@ public class App {
 
     public void run() {
         try {
-            this.inputFilter().inputNumbersCount().inputNumbers().calculateSum().outputSum();
+            this.inputFilter()
+                .inputFilterArgs()
+                .inputNumbersCount()
+                .inputNumbers()
+                .calculateSum()
+                .outputSum();
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
@@ -97,7 +99,6 @@ public class App {
 
 class AppState {
     private Filter filter;
-    private int filterArg;
     private int[] numbers;
     private int sum;
 
@@ -109,15 +110,6 @@ class AppState {
         this.filter = filter;
         return this;
 
-    }
-
-    public int getFilterArg() {
-        return this.filterArg;
-    }
-
-    public AppState setFilterArg(int filterArg) {
-        this.filterArg = filterArg;
-        return this;
     }
 
     public int[] getNumbers() {
