@@ -10,7 +10,7 @@ public class App {
     private Input input;
     private Output output;
     private AppState state;
-    private HashMap<String, Filter<Integer>> filters;
+    private HashMap<String, Filter> filters;
 
     private App inputFilter() throws Exception {
         this.output.output("Enter filter : ");

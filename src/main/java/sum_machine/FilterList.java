@@ -62,7 +62,7 @@ public class FilterList {
 
                 return false;
             }
-        })
+        });
 
         filters.put("NDVB", new Filter<Integer>() {
             @Override
@@ -73,7 +73,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared % this.data != 0;
+                return compared % this.args != 0;
             }
         });
 
@@ -87,7 +87,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared <= this.data;
+                return compared <= this.args;
             }
         });
 
@@ -101,7 +101,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared >= this.data;
+                return compared >= this.args;
             }
         });
 
@@ -116,7 +116,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared < this.data;
+                return compared < this.args;
             }
         });
 
@@ -129,7 +129,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared > this.data;
+                return compared > this.args;
             }
         });
 
@@ -142,7 +142,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared == this.data;
+                return compared == this.args;
             }
         });
 
@@ -155,7 +155,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared % this.data == 0;
+                return compared % this.args == 0;
             }
         });
     }
