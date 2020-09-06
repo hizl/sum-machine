@@ -1,6 +1,5 @@
 package src.main.java.sum_machine;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -22,11 +21,20 @@ public class FilterList {
                 return null;
             }
 
-            // Попробуй без библиотечных методов написать проверку на простоту числа)
             @Override
             public boolean isValid(int compared) {
-
-                return false;
+                int counter = 2;
+                boolean check = false;
+                for (int i = 2; i < compared; i++) {
+                    if (compared % i == 0) {
+                        counter++;
+                    }
+                }
+                if (counter > 2) {
+                    return !check;
+                } else {
+                    return check;
+                }
             }
         });
 
@@ -34,7 +42,6 @@ public class FilterList {
             @Override
             protected Pair<Integer, Integer> parseArgs(String argsLine) {
                 Scanner scanner = new Scanner(argsLine);
-
                 // Дальше сам попробуй тянуть аргументы)
 
                 return null;
