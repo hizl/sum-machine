@@ -23,18 +23,16 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                int counter = 2;
-                boolean check = false;
-                for (int i = 2; i < compared; i++) {
+                if (compared < 2) return false;
+                
+                long upperBound = Math.round(Math.sqrt((double) compared));
+                for (long i = 2; i <= upperBound; i++) {
                     if (compared % i == 0) {
-                        counter++;
+                        return false;
                     }
                 }
-                if (counter > 2) {
-                    return !check;
-                } else {
-                    return check;
-                }
+                
+                return true;
             }
         });
 
