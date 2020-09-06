@@ -1,11 +1,11 @@
 package src.main.java.sum_machine;
 
 public abstract class Filter<T> {
-    private T data;
+    protected T args;
 
     public final Filter<T> useArgs(String argsLine) {
         T args = this.parseArgs(argsLine);
-        this.data = args;
+        this.args = args;
         return this;
     }
     

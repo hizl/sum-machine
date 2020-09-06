@@ -23,18 +23,16 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                int counter = 2;
-                boolean check = false;
-                for (int i = 2; i < compared; i++) {
+                if (compared < 2) return false;
+                
+                long upperBound = Math.round(Math.sqrt((double) compared));
+                for (long i = 2; i <= upperBound; i++) {
                     if (compared % i == 0) {
-                        counter++;
+                        return false;
                     }
                 }
-                if (counter > 2) {
-                    return !check;
-                } else {
-                    return check;
-                }
+                
+                return true;
             }
         });
 
@@ -80,7 +78,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared % this.data != 0;
+                return compared % this.args != 0;
             }
         });
 
@@ -94,7 +92,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared <= this.data;
+                return compared <= this.args;
             }
         });
 
@@ -108,7 +106,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared >= this.data;
+                return compared >= this.args;
             }
         });
 
@@ -123,7 +121,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared < this.data;
+                return compared < this.args;
             }
         });
 
@@ -136,7 +134,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared > this.data;
+                return compared > this.args;
             }
         });
 
@@ -149,7 +147,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared == this.data;
+                return compared == this.args;
             }
         });
 
@@ -162,7 +160,7 @@ public class FilterList {
 
             @Override
             public boolean isValid(int compared) {
-                return compared % this.data == 0;
+                return compared % this.args == 0;
             }
         });
     }

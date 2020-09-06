@@ -10,7 +10,7 @@ public class App {
     private Input input;
     private Output output;
     private AppState state;
-    private HashMap<String, Filter<Integer>> filters;
+    private HashMap<String, Filter> filters;
 
     private App inputFilter() throws Exception {
         this.output.output("Enter filter : ");
@@ -18,7 +18,7 @@ public class App {
 
         boolean filterExists = this.filters.containsKey(filterName);
         if (!filterExists) {
-            throw new Exception("This filter doesn't exist ");
+            throw new Exception("This filter doesn't exist");
         }
         
         this.state.setFilter(this.filters.get(filterName));
@@ -27,7 +27,12 @@ public class App {
     }
 
     private App inputFilterArgs() {
-        // Здесь считывать строку с аргументами
+        Filter filter = this.state.getFilter();
+        String rawArgs = this.input.nextLine().trim();
+        filter.useArgs(
+            rawArgs
+        );
+
         return this;
     }
 
@@ -55,10 +60,9 @@ public class App {
 
         int[] numbers = this.state.getNumbers();
         Filter filter = this.state.getFilter();
-        int filterArgument = this.state.getFilterArg();
 
         for (int i = 0; i < numbers.length; i++) {
-            if (filter.isValid(numbers[i], filterArgument)) {
+            if (filter.isValid(numbers[i])) {
                 sum += numbers[i];
             }
         }

@@ -3,6 +3,7 @@ package src.main.java.sum_machine;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import src.main.java.sum_machine.App;
 
@@ -12,7 +13,6 @@ class Main {
 
         Input input = new Input() {
             private Scanner scanner = new Scanner(System.in);
-
 
             @Override
             public String nextLine() {
@@ -29,13 +29,14 @@ class Main {
 
             @Override
             public int nextInt() {
-
-
                 int number = this.scanner.nextInt();
                 return number;
             }
 
-
+            @Override
+            public boolean hasNext(Pattern pattern) {
+                return this.scanner.hasNext(pattern);
+            }
         };
 
 
