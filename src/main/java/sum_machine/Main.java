@@ -9,8 +9,6 @@ import src.main.java.sum_machine.App;
 
 class Main {
     public static void main(String[] args) {
-
-
         Input input = new Input() {
             private Scanner scanner = new Scanner(System.in);
 
@@ -54,6 +52,7 @@ class Main {
         };
 
         App application = new App(input, output);
+
 
         application.run();
     }

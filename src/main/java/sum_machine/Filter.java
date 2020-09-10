@@ -1,14 +1,23 @@
 package src.main.java.sum_machine;
 
+
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
 public abstract class Filter<T> {
     protected T args;
 
-    public final Filter<T> useArgs(String argsLine) {
+    public  Filter<T> useArgs(String argsLine) {
         T args = this.parseArgs(argsLine);
+
         this.args = args;
-        return this;
+
+
+                return this;
+
     }
-    
     abstract protected T parseArgs(String argsLine);
     abstract public boolean isValid(int compared);
 }

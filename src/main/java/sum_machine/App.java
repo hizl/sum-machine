@@ -1,6 +1,8 @@
 package src.main.java.sum_machine;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.stream.IntStream;
 
 import src.main.java.sum_machine.Input;
 import src.main.java.sum_machine.Output;
@@ -20,7 +22,6 @@ public class App {
         if (!filterExists) {
             throw new Exception("This filter doesn't exist");
         }
-        
         this.state.setFilter(this.filters.get(filterName));
 
         return this;
@@ -29,10 +30,7 @@ public class App {
     private App inputFilterArgs() {
         Filter filter = this.state.getFilter();
         String rawArgs = this.input.nextLine().trim();
-        filter.useArgs(
-            rawArgs
-        );
-
+        filter.useArgs(rawArgs);
         return this;
     }
 
@@ -55,22 +53,20 @@ public class App {
         return this;
     }
 
+
     private App calculateSum() {
         int sum = 0;
-
         int[] numbers = this.state.getNumbers();
         Filter filter = this.state.getFilter();
-
         for (int i = 0; i < numbers.length; i++) {
             if (filter.isValid(numbers[i])) {
                 sum += numbers[i];
             }
         }
-
         this.state.setSum(sum);
-
         return this;
     }
+
 
     private App outputSum() {
         int sum = this.state.getSum();
@@ -90,11 +86,11 @@ public class App {
     public void run() {
         try {
             this.inputFilter()
-                .inputFilterArgs()
-                .inputNumbersCount()
-                .inputNumbers()
-                .calculateSum()
-                .outputSum();
+                    .inputFilterArgs()
+                    .inputNumbersCount()
+                    .inputNumbers()
+                    .calculateSum()
+                    .outputSum();
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }

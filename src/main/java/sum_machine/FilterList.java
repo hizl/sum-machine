@@ -1,7 +1,9 @@
 package src.main.java.sum_machine;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 import src.main.java.sum_machine.Filter;
 import src.main.java.sum_machine.Pair;
@@ -24,50 +26,63 @@ public class FilterList {
             @Override
             public boolean isValid(int compared) {
                 if (compared < 2) return false;
-                
                 long upperBound = Math.round(Math.sqrt((double) compared));
                 for (long i = 2; i <= upperBound; i++) {
                     if (compared % i == 0) {
                         return false;
                     }
                 }
-                
                 return true;
             }
         });
 
+
         filters.put("IBND", new Filter<Pair<Integer, Integer>>() {
             @Override
+
             protected Pair<Integer, Integer> parseArgs(String argsLine) {
                 Scanner scanner = new Scanner(argsLine);
-                // Дальше сам попробуй тянуть аргументы)
+
 
                 return null;
             }
 
             @Override
             public boolean isValid(int compared) {
-
-                return false;
+                return true;
             }
         });
 
         filters.put("ISSUM", new Filter<int[]>() {
+
             @Override
             protected int[] parseArgs(String argsLine) {
                 Scanner scanner = new Scanner(argsLine);
 
-                // Дальше сам попробуй тянуть аргументы)
 
-                return null;
+                int[] numbersArray = new int[3];
+                String parseString = scanner.nextLine();
+                String[] stringArray = parseString.split(" ");
+                for (int i = 0; i < stringArray.length; i++) {
+                    numbersArray[i] = Integer.parseInt(stringArray[i]);
+
+                }
+                return numbersArray;
             }
 
             @Override
             public boolean isValid(int compared) {
 
+
+
+                
+
                 return false;
+
+
             }
         });
+
 
         filters.put("NDVB", new Filter<Integer>() {
             @Override
