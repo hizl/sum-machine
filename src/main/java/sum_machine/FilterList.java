@@ -1,9 +1,9 @@
 package src.main.java.sum_machine;
 
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.Scanner;
-import java.util.StringTokenizer;
+
 
 import src.main.java.sum_machine.Filter;
 import src.main.java.sum_machine.Pair;
@@ -14,8 +14,10 @@ public class FilterList {
     private FilterList() {
     }
 
+
     private static void fillFilters() {
         filters = new HashMap<String, Filter>();
+
 
         filters.put("ISPRM", new Filter() {
             @Override
@@ -55,12 +57,42 @@ public class FilterList {
 
         filters.put("ISSUM", new Filter<int[]>() {
 
+
+            @Override
+            public Filter<int[]> useArgs(String argsLine) {
+                Scanner scanner = new Scanner(argsLine);
+                int i;
+                int sum;
+                String sumArgument = "";
+                int[] numbersArray = new int[2];
+                String parseString = scanner.nextLine();
+                String[] stringArray = parseString.split(" ");
+                for (i = 0; i < stringArray.length; i++) {
+                    numbersArray[i] = Integer.parseInt(stringArray[i]);
+                    int number = numbersArray[0];
+                    int number2 = numbersArray[1];
+                    sum = number + number2;
+                    sumArgument = String.valueOf(sum);
+                }
+                return super.useArgs(sumArgument);
+            }
+
+
+            @Override
+            public boolean isValid(int compared) {
+                String parseInt = String.valueOf(compared);
+                Filter<int[]> sumNumbers = useArgs(parseInt);
+                if (sumNumbers.equals(compared)) {
+                    return true;
+                }
+                return false;
+            }
+
+
             @Override
             protected int[] parseArgs(String argsLine) {
                 Scanner scanner = new Scanner(argsLine);
-
-
-                int[] numbersArray = new int[3];
+                int[] numbersArray = new int[1];
                 String parseString = scanner.nextLine();
                 String[] stringArray = parseString.split(" ");
                 for (int i = 0; i < stringArray.length; i++) {
@@ -68,18 +100,6 @@ public class FilterList {
 
                 }
                 return numbersArray;
-            }
-
-            @Override
-            public boolean isValid(int compared) {
-
-
-
-                
-
-                return false;
-
-
             }
         });
 
