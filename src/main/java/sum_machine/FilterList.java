@@ -41,65 +41,68 @@ public class FilterList {
 
         filters.put("IBND", new Filter<Pair<Integer, Integer>>() {
             @Override
-
             protected Pair<Integer, Integer> parseArgs(String argsLine) {
                 Scanner scanner = new Scanner(argsLine);
 
+                Pair<Integer, Integer> args = new Pair<Integer, Integer>(
+                    scanner.nextInt(),
+                    scanner.nextInt()
+                );
 
-                return null;
+                return args;
             }
 
             @Override
             public boolean isValid(int compared) {
-                return true;
+                int lowerBound = this.args.get0() <= this.args.get1() ? 
+                    this.args.get0() : 
+                    this.args.get1();
+
+                int upperBound = this.args.get0() <= this.args.get1() ?
+                    this.args.get1() :
+                    this.args.get0();
+
+                return (lowerBound <= compared) && (compared <= upperBound);
             }
         });
 
         filters.put("ISSUM", new Filter<int[]>() {
+            private int sum = 0;
 
+            private int calculateSum() {
+                int result = 0;
+
+                for (int i = 0; i < this.args.length; i++) {
+                    result += this.args[i];
+                }
+
+                return result;
+             }
 
             @Override
             public Filter<int[]> useArgs(String argsLine) {
-                Scanner scanner = new Scanner(argsLine);
-                int i;
-                int sum;
-                String sumArgument = "";
-                int[] numbersArray = new int[2];
-                String parseString = scanner.nextLine();
-                String[] stringArray = parseString.split(" ");
-                for (i = 0; i < stringArray.length; i++) {
-                    numbersArray[i] = Integer.parseInt(stringArray[i]);
-                    int number = numbersArray[0];
-                    int number2 = numbersArray[1];
-                    sum = number + number2;
-                    sumArgument = String.valueOf(sum);
-                }
-                return super.useArgs(sumArgument);
+                super.useArgs(argsLine);
+                this.sum = this.calculateSum();
+                return this;
             }
 
 
             @Override
             public boolean isValid(int compared) {
-                String parseInt = String.valueOf(compared);
-                Filter<int[]> sumNumbers = useArgs(parseInt);
-                if (sumNumbers.equals(compared)) {
-                    return true;
-                }
-                return false;
+                return compared == this.sum;
             }
 
 
             @Override
             protected int[] parseArgs(String argsLine) {
-                Scanner scanner = new Scanner(argsLine);
-                int[] numbersArray = new int[1];
-                String parseString = scanner.nextLine();
-                String[] stringArray = parseString.split(" ");
-                for (int i = 0; i < stringArray.length; i++) {
-                    numbersArray[i] = Integer.parseInt(stringArray[i]);
+                String[] rawArgs = argsLine.split(" ");
+                int[] result = new int[rawArgs.length];
 
+                for (int i = 0; i < rawArgs.length; i++) {
+                    result[i] = Integer.parseInt(rawArgs[i]);
                 }
-                return numbersArray;
+
+                return result;
             }
         });
 
