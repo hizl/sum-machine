@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import src.main.java.sum_machine.App;
+import src.main.java.sum_machine.SumMachine;
 
 class Main {
     public static void main(String[] args) {
@@ -51,7 +51,7 @@ class Main {
             }
         };
 
-        App application = new App(input, output);
+        SumMachine application = new SumMachine(input, output);
 
 
         application.run();
