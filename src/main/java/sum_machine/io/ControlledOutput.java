@@ -14,7 +14,7 @@ public class ControlledOutput implements Output, Observable {
 
     private void subscribeToInputChange(Observer observer) {
         observer.subscribe(
-            Events.CHANGE_INPUT_METHOD,
+            Events.CHANGE_OUTPUT_METHOD,
             this
         );
     }

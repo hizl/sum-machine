@@ -93,9 +93,17 @@ public class SumMachine implements Application, Observable {
         );
     }
 
+    private void subscribeToChangeOutput(Observer observer) {
+        observer.subscribe(
+            Events.CHANGE_OUTPUT_METHOD, 
+            this
+        );
+    }
+
     public SumMachine(Input input, Output output, Observer observer) {
         this(input, output);
         this.subscribeToChangeInput(observer);
+        this.subscribeToChangeOutput(observer);
     } 
 
     @Override
