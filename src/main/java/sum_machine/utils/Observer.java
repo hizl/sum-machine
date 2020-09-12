@@ -33,7 +33,7 @@ public final class Observer {
         return this;
     }
 
-    public Observer dispatch(String event) {
+    public Observer dispatch(String event, Object data) {
         if (!this.events.containsKey(event)) {
             return null;
         }
@@ -41,7 +41,7 @@ public final class Observer {
         HashSet<Observable> observables = this.events.get(event);
 
         for (Observable observable : observables) {
-            observable.trigger();
+            observable.trigger(event, data);
         }
 
         return this;

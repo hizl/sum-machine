@@ -6,13 +6,17 @@ import src.main.java.sum_machine.io.Input;
 import src.main.java.sum_machine.io.Output;
 import src.main.java.sum_machine.filters.FilterList;
 import src.main.java.sum_machine.filters.Filter;
+import src.main.java.sum_machine.utils.Observer;
+import src.main.java.sum_machine.utils.Observable;
+import src.main.java.sum_machine.events.SumMachineEvents;
 import src.main.java.sum_machine.apps.Application;
 
-public class SumMachine implements Application {
+public class SumMachine implements Application, Observable {
     private Input input;
     private Output output;
     private SumMachineStore store;
     private HashMap<String, Filter> filters;
+    private Observer observer = null;
 
     private SumMachine inputFilter() throws Exception {
         this.output.output("Enter filter : ");
@@ -83,6 +87,20 @@ public class SumMachine implements Application {
         this.filters = FilterList.get();
     }
 
+    private void subscribeToChangeInput(Observer observer) {
+        this.observer = observer;
+        this.observer.subscribe(
+            SumMachineEvents.CHANGE_INPUT_METHOD, 
+            this
+        );
+    }
+
+    public SumMachine(Input input, Output output, Observer observer) {
+        this(input, output);
+        this.subscribeToChangeInput(observer);
+    } 
+
+    @Override
     public void run() {
         try {
             this.inputFilter()
@@ -94,6 +112,11 @@ public class SumMachine implements Application {
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
+    }
+
+    @Override
+    public void trigger(String event, Object data) {
+        // Your code here
     }
 }
 
