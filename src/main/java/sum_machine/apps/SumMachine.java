@@ -6,10 +6,6 @@ import src.main.java.sum_machine.io.Input;
 import src.main.java.sum_machine.io.Output;
 import src.main.java.sum_machine.filters.FilterList;
 import src.main.java.sum_machine.filters.Filter;
-import src.main.java.sum_machine.utils.Observer;
-import src.main.java.sum_machine.utils.Observable;
-import src.main.java.sum_machine.constants.Events;
-import src.main.java.sum_machine.apps.Application;
 
 public class SumMachine implements Application {
     private Input input;
@@ -18,7 +14,7 @@ public class SumMachine implements Application {
     private HashMap<String, Filter> filters;
 
     private SumMachine inputFilter() throws Exception {
-        this.output.output("Enter filter : ");
+        this.output.outFormat("Enter filter : ");
         String filterName = this.input.next();
 
         boolean filterExists = this.filters.containsKey(filterName);
@@ -38,14 +34,14 @@ public class SumMachine implements Application {
     }
 
     private SumMachine inputNumbersCount() {
-        this.output.output("Enter amount of numbers: ");
+        this.output.outFormat("Enter amount of numbers: ");
         int numbersCount = this.input.nextInt();
         this.store.setNumbers(new int[numbersCount]);
         return this;
     }
 
     private SumMachine inputNumbers() {
-        this.output.output("Enter numbers: ");
+        this.output.outFormat("Enter numbers: ");
 
         int[] numbers = this.store.getNumbers();
 
