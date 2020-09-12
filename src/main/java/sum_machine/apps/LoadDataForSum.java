@@ -14,10 +14,11 @@ public class LoadDataForSum implements Application {
     private Output output;
     private FileInput fileInput;
 
-    public LoadDataForSum(Input input, Output output, Observer observer) {
+    public LoadDataForSum(Input input, Output output, Observer observer, FileInput fileInput) {
         this.observer = observer;
         this.input = input;
         this.output = output;
+        this.fileInput = fileInput;
     }
 
     /* Your code here */
