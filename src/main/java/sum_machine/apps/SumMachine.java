@@ -11,7 +11,7 @@ import src.main.java.sum_machine.utils.Observable;
 import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.apps.Application;
 
-public class SumMachine implements Application, Observable {
+public class SumMachine implements Application {
     private Input input;
     private Output output;
     private SumMachineStore store;
@@ -84,30 +84,10 @@ public class SumMachine implements Application, Observable {
         this.output = output;
         this.store = new SumMachineStore();
         this.filters = FilterList.get();
-    }
-
-    private void subscribeToChangeInput(Observer observer) {
-        observer.subscribe(
-            Events.CHANGE_INPUT_METHOD, 
-            this
-        );
-    }
-
-    private void subscribeToChangeOutput(Observer observer) {
-        observer.subscribe(
-            Events.CHANGE_OUTPUT_METHOD, 
-            this
-        );
-    }
-
-    public SumMachine(Input input, Output output, Observer observer) {
-        this(input, output);
-        this.subscribeToChangeInput(observer);
-        this.subscribeToChangeOutput(observer);
     } 
 
     @Override
-    public boolean run() {
+    public void run() {
         try {
             this.inputFilter()
                     .inputFilterArgs()
@@ -118,13 +98,11 @@ public class SumMachine implements Application, Observable {
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
-
-        return false;
     }
 
     @Override
-    public void trigger(String event, Object data) {
-        // Your code here
+    public boolean killsFlow() {
+        return false;
     }
 }
 

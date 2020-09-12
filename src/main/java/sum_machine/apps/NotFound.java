@@ -10,8 +10,12 @@ public class NotFound implements Application {
     }
     
     @Override
-    public boolean run() {
+    public void run() {
         this.output.output("Command not found!");
-        return false;
     };
+
+    @Override
+    public boolean killsFlow() {
+        return false;
+    }
 }

@@ -23,8 +23,12 @@ public class LoadDataForSum implements Application {
     /* Your code here */
 
     @Override
-    public boolean run() {
+    public void run() {
         // Your code here
+    }
+
+    @Override
+    public boolean killsFlow() {
         return false;
     }
 }

@@ -20,8 +20,12 @@ public class ResetDataForSum implements Application {
     /* Your code here */
     
     @Override
-    public boolean run() {
+    public void run() {
         // Your code here
+    }
+
+    @Override
+    public boolean killsFlow() {
         return false;
     }
 }
