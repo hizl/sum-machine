@@ -99,7 +99,7 @@ public class SumMachine implements Application, Observable {
     } 
 
     @Override
-    public void run() {
+    public boolean run() {
         try {
             this.inputFilter()
                     .inputFilterArgs()
@@ -110,6 +110,8 @@ public class SumMachine implements Application, Observable {
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
+
+        return false;
     }
 
     @Override
