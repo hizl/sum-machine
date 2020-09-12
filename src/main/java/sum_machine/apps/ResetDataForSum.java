@@ -4,15 +4,16 @@ import src.main.java.sum_machine.utils.Observer;
 import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.io.ConsoleInput;
 import src.main.java.sum_machine.io.Output;
+import src.main.java.sum_machine.constants.Events;
+import src.main.java.sum_machine.constants.InputMethods;
+import src.main.java.sum_machine.constants.OutputMethods;
 
 public class ResetDataForSum implements Application {
     private Observer observer;
-    private ConsoleInput consoleInput;
     private Output output;
 
-    public ResetDataForSum(Observer observer, ConsoleInput consoleInput, Output output) {
+    public ResetDataForSum(Observer observer, Output output) {
         this.observer = observer;
-        this.consoleInput = consoleInput;
         this.output = output;
     }
 

@@ -58,7 +58,7 @@ public class ControlledInput implements Input, Observable {
 
     @Override
     public void trigger(String event, Object data) {
-        Pair<String, Input> parsedData = (Pair<String, Input>)data;
-        this.method = parsedData.get0();
+        String parsedData = (String)data;
+        this.method = parsedData;
     }
 }
