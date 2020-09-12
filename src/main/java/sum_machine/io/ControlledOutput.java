@@ -4,35 +4,16 @@ import java.util.HashMap;
 
 import src.main.java.sum_machine.utils.Observable;
 import src.main.java.sum_machine.utils.Observer;
-import src.main.java.sum_machine.constants.Events;
-import src.main.java.sum_machine.constants.OutputMethods;
-import src.main.java.sum_machine.utils.Pair;
 
 public class ControlledOutput implements Output, Observable<String> {
     private HashMap<String, Output> outputs;
-    private String method = OutputMethods.ALL_TO_CONSOLE;
+    private String method;
+    private Observer observer;
 
-    private void subscribeToInputChange(Observer observer) {
-        observer.subscribe(
-            Events.CHANGE_OUTPUT_METHOD,
-            this
-        );
-    }
-
-    public ControlledOutput(Observer observer) {
-        this.outputs = new HashMap<String, Output>();
-
-        this.outputs.put(
-            OutputMethods.ALL_TO_CONSOLE,
-            new AllConsoleOutput()
-        );
-
-        this.outputs.put(
-            OutputMethods.RESULT_TO_CONSOLE,
-            new ResultConsoleOutput()
-        );
-
-        this.subscribeToInputChange(observer);
+    public ControlledOutput(HashMap<String, Output> outputs, String defaultMethod, Observer observer) {
+        this.outputs = outputs;
+        this.method = defaultMethod;
+        this.observer = observer;
     }
     
     @Override
@@ -52,6 +33,11 @@ public class ControlledOutput implements Output, Observable<String> {
 
     @Override
     public Output useSettings(Object settings) {
+        return this;
+    }
+
+    public Output subscribe(String event) {
+        this.observer.subscribe(event, this);
         return this;
     }
 }

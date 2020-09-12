@@ -1,8 +1,6 @@
 package src.main.java.sum_machine.apps;
 
 import src.main.java.sum_machine.utils.Observer;
-import src.main.java.sum_machine.constants.Events;
-import src.main.java.sum_machine.io.ConsoleInput;
 import src.main.java.sum_machine.io.Output;
 import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.constants.InputMethods;
