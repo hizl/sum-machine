@@ -28,7 +28,7 @@ class Main {
             }
 
             @Override
-            public int nextInt() {
+            public Integer nextInt() {
                 int number = this.scanner.nextInt();
                 return number;
             }

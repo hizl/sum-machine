@@ -8,7 +8,7 @@ import src.main.java.sum_machine.filters.FilterList;
 import src.main.java.sum_machine.filters.Filter;
 import src.main.java.sum_machine.utils.Observer;
 import src.main.java.sum_machine.utils.Observable;
-import src.main.java.sum_machine.events.SumMachineEvents;
+import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.apps.Application;
 
 public class SumMachine implements Application, Observable {
@@ -16,7 +16,6 @@ public class SumMachine implements Application, Observable {
     private Output output;
     private SumMachineStore store;
     private HashMap<String, Filter> filters;
-    private Observer observer = null;
 
     private SumMachine inputFilter() throws Exception {
         this.output.output("Enter filter : ");
@@ -88,9 +87,8 @@ public class SumMachine implements Application, Observable {
     }
 
     private void subscribeToChangeInput(Observer observer) {
-        this.observer = observer;
-        this.observer.subscribe(
-            SumMachineEvents.CHANGE_INPUT_METHOD, 
+        observer.subscribe(
+            Events.CHANGE_INPUT_METHOD, 
             this
         );
     }

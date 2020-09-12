@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 public interface Input {
     public String next();
 
-    public int nextInt();
+    public Integer nextInt();
 
     public String nextLine();
 
