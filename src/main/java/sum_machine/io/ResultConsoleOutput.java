@@ -14,4 +14,9 @@ public class ResultConsoleOutput implements Output {
             System.out.printf(pattern.substring(1), args);
         }
     };
+
+    @Override
+    public Output useSettings(Object settings) {
+        return this;
+    }
 }

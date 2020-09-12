@@ -25,4 +25,9 @@ public class ConsoleInput implements Input {
     public boolean hasNext(Pattern pattern) {
         return this.scanner.hasNext(pattern);
     };
+
+    @Override
+    public Input useSettings(Object settings) {
+        return this;
+    }
 }

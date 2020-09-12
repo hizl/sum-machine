@@ -18,4 +18,9 @@ public class AllConsoleOutput implements Output {
             System.out.printf(pattern, args);
         }
     };
+
+    @Override
+    public Output useSettings(Object settings) {
+        return this;
+    }
 }

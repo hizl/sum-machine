@@ -10,4 +10,9 @@ public class ConsoleOutput implements Output {
     public void outFormat(String pattern, Object... args) {
         System.out.printf(pattern, args);
     };
+
+    @Override
+    public Output useSettings(Object settings) {
+        return this;
+    }
 }

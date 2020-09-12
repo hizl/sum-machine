@@ -4,12 +4,8 @@ import java.util.Scanner;
 import java.io.File;
 import java.util.regex.Pattern;
 
-public class FileInput implements Input {
+public class FileInput implements Input<String> {
     private Scanner scanner = null;
-
-    public void setFile(String pathname) throws Exception {
-        this.scanner = new Scanner(new File(pathname));
-    }
     
     @Override
     public String next() {
@@ -46,4 +42,14 @@ public class FileInput implements Input {
             return false;
         }
     };
+
+    @Override
+    public Input<String> useSettings(String settings) {
+        try {
+            this.scanner = new Scanner(new File(settings));
+            return this;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

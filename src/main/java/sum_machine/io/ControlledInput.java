@@ -9,7 +9,7 @@ import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.constants.InputMethods;
 import src.main.java.sum_machine.utils.Pair;
 
-public class ControlledInput implements Input, Observable {
+public class ControlledInput implements Input, Observable<Pair<String, String>> {
     private HashMap<String, Input> inputs;
     private String method = InputMethods.CONSOLE;
 
@@ -57,8 +57,14 @@ public class ControlledInput implements Input, Observable {
     };
 
     @Override
-    public void trigger(String event, Object data) {
-        String parsedData = (String)data;
-        this.method = parsedData;
+    public void trigger(String event, Pair<String, String> data) {
+        this.method = data.get0();
+
+        
+    }
+
+    @Override
+    public Input useSettings(Object settings) {
+        return this;
     }
 }

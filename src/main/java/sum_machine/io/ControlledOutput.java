@@ -8,7 +8,7 @@ import src.main.java.sum_machine.constants.Events;
 import src.main.java.sum_machine.constants.OutputMethods;
 import src.main.java.sum_machine.utils.Pair;
 
-public class ControlledOutput implements Output, Observable {
+public class ControlledOutput implements Output, Observable<String> {
     private HashMap<String, Output> outputs;
     private String method = OutputMethods.ALL_TO_CONSOLE;
 
@@ -46,8 +46,12 @@ public class ControlledOutput implements Output, Observable {
     };
 
     @Override
-    public void trigger(String event, Object data) {
-        String parsedData = (String)data;
-        this.method = parsedData;
+    public void trigger(String event, String data) {
+        this.method = data;
+    }
+
+    @Override
+    public Output useSettings(Object settings) {
+        return this;
     }
 }
