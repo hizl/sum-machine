@@ -5,28 +5,24 @@ import java.util.regex.Pattern;
 
 public class ConsoleInput implements Input {
     private Scanner scanner = new Scanner(System.in);
-
-    @Override
-    public String nextLine() {
-        String line = this.scanner.nextLine();
-        return line;
-    }
-
+    
     @Override
     public String next() {
-        String token = this.scanner.next();
-
-        return token;
-    }
+        return this.scanner.next();
+    };
 
     @Override
     public Integer nextInt() {
-        int number = this.scanner.nextInt();
-        return number;
-    }
+        return this.scanner.nextInt();
+    };
+
+    @Override
+    public String nextLine() {
+        return this.scanner.nextLine();
+    };
 
     @Override
     public boolean hasNext(Pattern pattern) {
         return this.scanner.hasNext(pattern);
-    }
+    };
 }

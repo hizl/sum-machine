@@ -25,7 +25,7 @@ public class ControlledInput implements Input, Observable {
 
         this.inputs.put(
             InputMethods.CONSOLE,
-            new ConsoleInput()
+            new DefaultConsoleInput()
         );
 
         this.inputs.put(
