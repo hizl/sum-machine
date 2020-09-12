@@ -1,11 +1,11 @@
 package src.main.java.sum_machine.apps;
 
-import src.main.java.sum_machine.io.AllConsoleOutput;
+import src.main.java.sum_machine.io.Output;
 
 public class NotFound implements Application {
-    private AllConsoleOutput output;
+    private Output output;
     
-    public NotFound(AllConsoleOutput output) {
+    public NotFound(Output output) {
         this.output = output;
     }
     
