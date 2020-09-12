@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
-import src.main.java.sum_machine.SumMachine;
+import src.main.java.sum_machine.apps.SumMachine;
+import src.main.java.sum_machine.io.Input;
+import src.main.java.sum_machine.io.Output;
 
 class Main {
     public static void main(String[] args) {

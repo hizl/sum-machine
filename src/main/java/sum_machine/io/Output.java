@@ -1,4 +1,4 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.io;
 
 public interface Output {
     public void output(String message);

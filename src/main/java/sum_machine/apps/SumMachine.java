@@ -1,11 +1,12 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.apps;
 
 import java.util.HashMap;
 
-import src.main.java.sum_machine.Input;
-import src.main.java.sum_machine.Output;
-import src.main.java.sum_machine.FilterList;
-import src.main.java.sum_machine.Application;
+import src.main.java.sum_machine.io.Input;
+import src.main.java.sum_machine.io.Output;
+import src.main.java.sum_machine.filters.FilterList;
+import src.main.java.sum_machine.filters.Filter;
+import src.main.java.sum_machine.apps.Application;
 
 public class SumMachine implements Application {
     private Input input;

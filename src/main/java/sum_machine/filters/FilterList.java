@@ -1,12 +1,12 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.filters;
 
 
 import java.util.HashMap;
 import java.util.Scanner;
 
 
-import src.main.java.sum_machine.Filter;
-import src.main.java.sum_machine.Pair;
+import src.main.java.sum_machine.filters.Filter;
+import src.main.java.sum_machine.utils.Pair;
 
 public class FilterList {
     private static HashMap<String, Filter> filters = null;

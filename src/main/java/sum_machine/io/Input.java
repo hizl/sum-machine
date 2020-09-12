@@ -1,4 +1,4 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.io;
 
 import java.util.regex.Pattern;
 
