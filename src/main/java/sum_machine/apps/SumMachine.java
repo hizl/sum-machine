@@ -66,7 +66,6 @@ public class SumMachine implements Application {
         return this;
     }
 
-
     private SumMachine outputSum() {
         int sum = this.store.getSum();
 

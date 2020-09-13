@@ -18,6 +18,17 @@ public class FilterList {
     private static void fillFilters() {
         filters = new HashMap<String, Filter>();
 
+        filters.put("ALL", new Filter() {
+            @Override
+            protected Object parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared) {
+                return true;
+            }
+        });
 
         filters.put("ISPRM", new Filter() {
             @Override
