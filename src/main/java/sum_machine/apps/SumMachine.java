@@ -14,7 +14,7 @@ public class SumMachine implements Application {
     private HashMap<String, Filter> filters;
 
     private SumMachine inputFilter() throws Exception {
-        this.output.outFormat("Enter filter : ");
+        this.output.outFormat("@ Enter filter : ");
         String filterName = this.input.next();
 
         boolean filterExists = this.filters.containsKey(filterName);
@@ -34,14 +34,14 @@ public class SumMachine implements Application {
     }
 
     private SumMachine inputNumbersCount() {
-        this.output.outFormat("Enter amount of numbers: ");
+        this.output.outFormat("@ Enter amount of numbers: ");
         int numbersCount = this.input.nextInt();
         this.store.setNumbers(new int[numbersCount]);
         return this;
     }
 
     private SumMachine inputNumbers() {
-        this.output.outFormat("Enter numbers: ");
+        this.output.outFormat("@ Enter numbers: ");
 
         int[] numbers = this.store.getNumbers();
 
