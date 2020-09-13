@@ -2,57 +2,79 @@
 package src.main.java.sum_machine;
 
 import java.util.HashMap;
-import java.util.Scanner;
-import java.util.regex.Pattern;
 
-import src.main.java.sum_machine.App;
+import src.main.java.sum_machine.utils.Observer;
+import src.main.java.sum_machine.apps.Index;
+import src.main.java.sum_machine.io.*;
+import src.main.java.sum_machine.constants.*;
 
 class Main {
+    private static HashMap<String, Input> setupInputsForController() {
+        HashMap<String, Input> inputs = new HashMap<String, Input>();
+
+        inputs.put(
+            InputMethods.CONSOLE,
+            new DefaultConsoleInput()
+        );
+
+        inputs.put(
+            InputMethods.FILE,
+            new FileInput()
+        );
+
+        return inputs;
+    }
+
+    private static HashMap<String, Output> setupOutputsForController() {
+        HashMap<String, Output> outputs = new HashMap<String, Output>();
+
+        outputs.put(
+            OutputMethods.ALL_TO_CONSOLE,
+            new AllConsoleOutput()
+        );
+
+        outputs.put(
+            OutputMethods.RESULT_TO_CONSOLE,
+            new ResultConsoleOutput()
+        );
+
+        return outputs;
+    }
+
+    private static ControlledInput setupControlledInput(Observer observer) {
+        ControlledInput controlledInput = new ControlledInput(
+            setupInputsForController(),
+            InputMethods.CONSOLE,
+            observer
+        );
+
+        controlledInput.subscribe(Events.CHANGE_INPUT_METHOD);
+
+        return controlledInput;
+    }
+
+    private static ControlledOutput setupControlledOutput(Observer observer) {
+        ControlledOutput controlledOutput = new ControlledOutput(
+            setupOutputsForController(),
+            OutputMethods.ALL_TO_CONSOLE,
+            observer
+        );
+
+        controlledOutput.subscribe(Events.CHANGE_OUTPUT_METHOD);
+
+        return controlledOutput;
+    }
+
     public static void main(String[] args) {
-        Input input = new Input() {
-            private Scanner scanner = new Scanner(System.in);
+        Observer observer = new Observer();
 
-            @Override
-            public String nextLine() {
-                String line = this.scanner.nextLine();
-                return line;
-            }
-
-            @Override
-            public String next() {
-                String token = this.scanner.next();
-
-                return token;
-            }
-
-            @Override
-            public int nextInt() {
-                int number = this.scanner.nextInt();
-                return number;
-            }
-
-            @Override
-            public boolean hasNext(Pattern pattern) {
-                return this.scanner.hasNext(pattern);
-            }
-        };
-
-
-        Output output = new Output() {
-
-            @Override
-            public void output(String message) {
-                System.out.print(message);
-            }
-
-            @Override
-            public void outFormat(String pattern, Object... args) {
-                System.out.printf(pattern, args);
-            }
-        };
-
-        App application = new App(input, output);
-
+        Index application = new Index(
+            new ConsoleInput(),
+            new ConsoleOutput(),
+            setupControlledInput(observer),
+            setupControlledOutput(observer),
+            observer
+        );
 
         application.run();
     }

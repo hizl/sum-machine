@@ -1,12 +1,12 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.filters;
 
 
 import java.util.HashMap;
 import java.util.Scanner;
 
 
-import src.main.java.sum_machine.Filter;
-import src.main.java.sum_machine.Pair;
+import src.main.java.sum_machine.filters.Filter;
+import src.main.java.sum_machine.utils.Pair;
 
 public class FilterList {
     private static HashMap<String, Filter> filters = null;
@@ -18,6 +18,17 @@ public class FilterList {
     private static void fillFilters() {
         filters = new HashMap<String, Filter>();
 
+        filters.put("ALL", new Filter() {
+            @Override
+            protected Object parseArgs(String argsLine) {
+                return null;
+            }
+
+            @Override
+            public boolean isValid(int compared) {
+                return true;
+            }
+        });
 
         filters.put("ISPRM", new Filter() {
             @Override

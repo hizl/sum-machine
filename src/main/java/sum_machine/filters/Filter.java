@@ -1,6 +1,4 @@
-package src.main.java.sum_machine;
-
-
+package src.main.java.sum_machine.filters;
 
 import java.util.Arrays;
 import java.util.List;

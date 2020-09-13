@@ -1,4 +1,4 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.utils;
 
 public class Pair<T0, T1> {
     private T0 item0;

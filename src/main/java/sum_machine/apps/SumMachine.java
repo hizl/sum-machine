@@ -1,50 +1,49 @@
-package src.main.java.sum_machine;
+package src.main.java.sum_machine.apps;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.stream.IntStream;
 
-import src.main.java.sum_machine.Input;
-import src.main.java.sum_machine.Output;
-import src.main.java.sum_machine.FilterList;
+import src.main.java.sum_machine.io.Input;
+import src.main.java.sum_machine.io.Output;
+import src.main.java.sum_machine.filters.FilterList;
+import src.main.java.sum_machine.filters.Filter;
 
-public class App {
+public class SumMachine implements Application {
     private Input input;
     private Output output;
-    private AppState state;
+    private SumMachineStore store;
     private HashMap<String, Filter> filters;
 
-    private App inputFilter() throws Exception {
-        this.output.output("Enter filter : ");
+    private SumMachine inputFilter() throws Exception {
+        this.output.outFormat("@ Enter filter : ");
         String filterName = this.input.next();
 
         boolean filterExists = this.filters.containsKey(filterName);
         if (!filterExists) {
             throw new Exception("This filter doesn't exist");
         }
-        this.state.setFilter(this.filters.get(filterName));
+        this.store.setFilter(this.filters.get(filterName));
 
         return this;
     }
 
-    private App inputFilterArgs() {
-        Filter filter = this.state.getFilter();
+    private SumMachine inputFilterArgs() {
+        Filter filter = this.store.getFilter();
         String rawArgs = this.input.nextLine().trim();
         filter.useArgs(rawArgs);
         return this;
     }
 
-    private App inputNumbersCount() {
-        this.output.output("Enter amount of numbers: ");
+    private SumMachine inputNumbersCount() {
+        this.output.outFormat("@ Enter amount of numbers: ");
         int numbersCount = this.input.nextInt();
-        this.state.setNumbers(new int[numbersCount]);
+        this.store.setNumbers(new int[numbersCount]);
         return this;
     }
 
-    private App inputNumbers() {
-        this.output.output("Enter numbers: ");
+    private SumMachine inputNumbers() {
+        this.output.outFormat("@ Enter numbers: ");
 
-        int[] numbers = this.state.getNumbers();
+        int[] numbers = this.store.getNumbers();
 
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = this.input.nextInt();
@@ -54,46 +53,35 @@ public class App {
     }
 
 
-    private App calculateSum() {
+    private SumMachine calculateSum() {
         int sum = 0;
-        int[] numbers = this.state.getNumbers();
-        Filter filter = this.state.getFilter();
+        int[] numbers = this.store.getNumbers();
+        Filter filter = this.store.getFilter();
         for (int i = 0; i < numbers.length; i++) {
             if (filter.isValid(numbers[i])) {
                 sum += numbers[i];
             }
         }
-        this.state.setSum(sum);
+        this.store.setSum(sum);
         return this;
     }
 
-
-    private App summationAllNumbers() {
-        int sum = 0;
-        int[] numbers = this.state.getNumbers();
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
-        }
-        this.output.outFormat("the sum of all numbers is: %d\n", sum);
-        return this;
-    }
-
-
-    private App outputSum() {
-        int sum = this.state.getSum();
+    private SumMachine outputSum() {
+        int sum = this.store.getSum();
 
         this.output.outFormat("Resulting sum is: %d\n", sum);
 
         return this;
     }
 
-    public App(Input input, Output output) {
+    public SumMachine(Input input, Output output) {
         this.input = input;
         this.output = output;
-        this.state = new AppState();
+        this.store = new SumMachineStore();
         this.filters = FilterList.get();
-    }
+    } 
 
+    @Override
     public void run() {
         try {
             this.inputFilter()
@@ -101,15 +89,19 @@ public class App {
                     .inputNumbersCount()
                     .inputNumbers()
                     .calculateSum()
-                    .outputSum()
-                    .summationAllNumbers();
+                    .outputSum();
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
     }
+
+    @Override
+    public boolean killsFlow() {
+        return false;
+    }
 }
 
-class AppState {
+class SumMachineStore {
     private Filter filter;
     private int[] numbers;
     private int sum;
@@ -118,7 +110,7 @@ class AppState {
         return this.filter;
     }
 
-    public AppState setFilter(Filter filter) {
+    public SumMachineStore setFilter(Filter filter) {
         this.filter = filter;
         return this;
 
@@ -128,7 +120,7 @@ class AppState {
         return this.numbers;
     }
 
-    public AppState setNumbers(int[] numbers) {
+    public SumMachineStore setNumbers(int[] numbers) {
         this.numbers = numbers;
         return this;
     }
@@ -137,7 +129,7 @@ class AppState {
         return this.sum;
     }
 
-    public AppState setSum(int sum) {
+    public SumMachineStore setSum(int sum) {
         this.sum = sum;
         return this;
     }
