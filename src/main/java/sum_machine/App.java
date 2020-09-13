@@ -67,18 +67,6 @@ public class App {
         return this;
     }
 
-
-    private App summationAllNumbers() {
-        int sum = 0;
-        int[] numbers = this.state.getNumbers();
-        for (int i = 0; i < numbers.length; i++) {
-            sum += numbers[i];
-        }
-        this.output.outFormat("the sum of all numbers is: %d\n", sum);
-        return this;
-    }
-
-
     private App outputSum() {
         int sum = this.state.getSum();
 
@@ -101,8 +89,7 @@ public class App {
                     .inputNumbersCount()
                     .inputNumbers()
                     .calculateSum()
-                    .outputSum()
-                    .summationAllNumbers();
+                    .outputSum();
         } catch (Exception error) {
             this.output.output(error.getMessage());
         }
