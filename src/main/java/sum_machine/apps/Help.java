@@ -9,6 +9,7 @@ public class Help implements Application {
         this.output = output;
     }
 
+    // TODO: load help from file as it can grow up
     @Override
     public void run() {
         this.output.output(
